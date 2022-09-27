@@ -3,10 +3,8 @@
            :repo "minad/org-modern")
   :pin "828cf100c62fc9dfb50152c192ac3a968c1b54bc")
 
-(package! flycheck-projectile
-  :recipe (:host github
-           :repo "nbfalcon/flycheck-projectile")
-  :pin "ce6e9e8793a55dace13d5fa13badab2dca3b5ddb")
+;; Git desc feature: watching the git commit message
+(package! blamer)
 
 ;; Searching staff on the internet (Youtube, google, ...)
 (package! engine-mode)

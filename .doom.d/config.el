@@ -6,14 +6,32 @@
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets. It is optional.
-(setq user-full-name "John Doe"
-      user-mail-address "john@doe.com")
+(setq user-full-name "Thang Jenny"
+      user-mail-address "thanglemon204@gmail.com")
+
+;; Git blammer
+(use-package blamer
+  :bind (("s-i" . blamer-show-commit-info))
+  :defer 20
+  :custom
+  (blamer-idle-time 0.3)
+  (blamer-min-offset 70)
+  :custom-face
+  (blamer-face ((t :foreground "#7a88cf"
+                    :background nil
+                    :height 140
+                    :italic t)))
+  :config
+  (global-blamer-mode 1))
 
 (map!
         ;; Command/Window
         "s-k"          #'move-text-up
         "s-j"          #'move-text-down)
 
+(map!
+        "s-p"          #'flycheck-previous-error
+        "s-n"          #'flycheck-next-error)
 
 ;; Org styling, hide markup etc.
 (setq org-hide-emphasis-markers t
@@ -55,17 +73,17 @@
 
 
       ;; Moving window and split like vim
-      (:prefix ("s" . "Split and move windows")
-      :n "w" #'save-buffer
-      :n "q" #'evil-quit
-      :n "s" #'split-window-below
-      :n "v" #'split-window-right
-      :n "l" #'windmove-right
-      :n "h" #'windmove-left
-      :n "k" #'windmove-up
-      :n "j" #'windmove-down
-      :n "f" #'projectile-find-file
-      )
+      ;; (:prefix ("s" . "Split and move windows")
+      ;; :n "w" #'save-buffer
+      ;; :n "q" #'evil-quit
+      ;; :n "s" #'split-window-below
+      ;; :n "v" #'split-window-right
+      ;; :n "l" #'windmove-right
+      ;; :n "h" #'windmove-left
+      ;; :n "k" #'windmove-up
+      ;; :n "j" #'windmove-down
+      ;; :n "f" #'projectile-find-file
+      ;; )
 
 )
 
@@ -199,7 +217,8 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-solarized-dark)
+;; (setq doom-theme 'doom-solarized-dark)
+(setq doom-theme 'doom-solarized-dark-high-contrast)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -231,7 +250,7 @@
 ;; - `add-load-path!' for adding directories to the `load-path', relative to
 ;;   this file. Emacs searches the `load-path' when you load packages with
 ;;   `require' or `use-package'.
-;; - `map!' for binding new keys
+;; - `map!' for binding new key
 ;;
 ;; To get information about any of these functions/macros, move the cursor over
 ;; the highlighted symbol at press 'K' (non-evil users must press 'C-c c k').

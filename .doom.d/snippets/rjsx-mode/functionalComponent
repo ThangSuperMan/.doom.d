@@ -4,7 +4,7 @@
 # condition: t
 # --
 
-import React from 'react';
+import React from 'react'
 
 const ${1:functionName} = (${2:}) => {
   return (
@@ -12,4 +12,4 @@ const ${1:functionName} = (${2:}) => {
   )
 }
 
-export default ${1:$(yas-text)};
+export default ${1:$(yas-text)}

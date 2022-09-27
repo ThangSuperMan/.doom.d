@@ -1,7 +1,6 @@
 # -*- mode: snippet -*-
 # name: Console log
 # key: jj
-# condition: t
 # --
 
-console.log(${1:});
+console.log(${1:})
