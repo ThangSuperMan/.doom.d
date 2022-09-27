@@ -10,6 +10,6 @@ const ${1:functionName} = (${2:}) => {
   return (
     ${3:}
   )
-}
+};
 
-export default ${1:$(yas-text)}
+export default ${1:$(yas-text)};

@@ -10,6 +10,9 @@
       user-mail-address "thanglemon204@gmail.com")
 
 ;; Git blammer
+(map!
+        "C-c b"          #'blamer-mode)
+
 (use-package blamer
   :bind (("s-i" . blamer-show-commit-info))
   :defer 20
@@ -22,7 +25,11 @@
                     :height 140
                     :italic t)))
   :config
-  (global-blamer-mode 1))
+  (global-blamer-mode 0))
+
+(setq blamer-author-formatter " ✎ %s ")
+(setq blamer-datetime-formatter "[%s]")
+(setq blamer-commit-formatter " ● %s")
 
 (map!
         ;; Command/Window

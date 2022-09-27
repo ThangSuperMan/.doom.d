@@ -6,4 +6,4 @@
 
 const ${1:functionName} = (${2:}) => {
       ${3: //TODO}
-}
+};
