@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Circle shape
+# key: circle
+# --
+
+width: ${1:200px};
+height: ${1:$(yas-text)};
+border-radius: 100rem;

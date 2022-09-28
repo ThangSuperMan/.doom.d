@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: Grid center
+# key: gridc
+# --
+
+display: grid;
+place-items: center;

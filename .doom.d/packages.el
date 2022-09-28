@@ -6,6 +6,8 @@
 ;; Git desc feature: watching the git commit message
 (package! blamer)
 
+;; (package! parrot)
+
 ;; Searching staff on the internet (Youtube, google, ...)
 (package! engine-mode)
 

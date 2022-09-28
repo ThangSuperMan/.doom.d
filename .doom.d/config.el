@@ -1,13 +1,46 @@
-;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
-
-;; Place your private configuration here! Remember, you do not need to run 'doom
-;; sync' after modifying this file!
-
-
-;; Some functionality uses this to identify you, e.g. GPG configuration, email
-;; clients, file templates and snippets. It is optional.
 (setq user-full-name "Thang Jenny"
       user-mail-address "thanglemon204@gmail.com")
+
+;; You have to install the ef-thems first by using the command M-x: packages-install
+(require 'ef-themes)
+(load-theme 'ef-summer t)
+
+;; Turn off the highlight current line
+(setq global-hl-line-modes nil)
+
+;; (define-key evil-normal-state-map (kbd "C-c [") 'js2-err)
+(define-key evil-normal-state-map (kbd "C-j") 'js2-next-error)
+
+;; [[file:config.org::*Clock][Clock:1]]
+(after! doom-modeline
+  (setq display-time-string-forms
+        '((propertize (concat " 🕘 " 24-hours ":" minutes "   "))))
+  (display-time-mode 1) ; Enable time in the mode-line
+
+  ;; Add padding to the right
+  (doom-modeline-def-modeline 'main
+   '(bar workspace-name window-number modals matches follow buffer-info remote-host buffer-position word-count selection-info)
+   '(objed-state misc-info persp-name battery grip irc mu4e gnus github debug repl lsp minor-modes input-method indent-info buffer-encoding major-mode process vcs checker "   ")))
+;; Clock:1 ends here
+
+;; [[file:config.org::*Battery][Battery:1]]
+(after! doom-modeline
+  (let ((battery-str (battery)))
+    (unless (or (equal "Battery status not available" battery-str)
+                (string-match-p (regexp-quote "unknown") battery-str)
+                (string-match-p (regexp-quote "N/A") battery-str))
+      (display-battery-mode 1))))
+;; Battery:1 ends here
+
+;; [[file:config.org::*Mode line customization][Mode line customization:1]]
+(after! doom-modeline
+  (setq doom-modeline-bar-width 4
+        doom-modeline-mu4e t
+        doom-modeline-major-mode-icon t
+        doom-modeline-major-mode-color-icon t
+        doom-modeline-buffer-file-name-style 'truncate-upto-project))
+;; Mode line customization:1 ends here
+
 
 ;; Git blammer
 (map!
@@ -225,7 +258,12 @@
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 ;; (setq doom-theme 'doom-solarized-dark)
-(setq doom-theme 'doom-solarized-dark-high-contrast)
+;; (setq doom-theme 'doom-solarized-dark-high-contrast)
+;; (setq doom-theme 'doom-dracula)
+;; (setq
+
+;; (use-package ef-themes)
+;; (load-theme 'ef-summer t)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.

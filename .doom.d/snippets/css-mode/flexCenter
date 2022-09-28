@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Flex center
+# key: flexc
+# --
+
+display: flex;
+align-items: center;
+justify-content: center;
