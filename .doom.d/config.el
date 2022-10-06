@@ -1,5 +1,7 @@
-(setq user-full-name "Thang Jenny"
-      user-mail-address "thanglemon204@gmail.com")
+(setq user-full-name "Phan Tan Thang"
+      user-mail-address "thanglemon204@gmail.com"
+      user-blog-url "https://github.com/thangsuperman")
+
 
 ;; You have to install the ef-thems first by using the command M-x: packages-install
 ;; (require 'ef-themes)
@@ -8,19 +10,71 @@
 ;; Turn off the highlight current line
 (setq global-hl-line-modes nil)
 
-(setq lsp-ui-doc-enable t)
-;; Show refereneces
-(setq lsp-lens-enable nil)
-(setq lsp-headerline-breadcrumb-enable t)
-(setq lsp-ui-sideline-enable t)
-(setq lsp-modeline-diagnostics-enable t)
+;; Mssql
+(setq lsp-mssql-connections
+      [(:server "localhost"
+                :database ""
+                :user "sa"
+                :password "MyPassword123#")])
 
+(require 'lsp-mssql)
+(add-hook 'sql-mode-hook 'lsp)
+
+;; Loading the lsp with lsp ui mode
+(use-package! lsp-mode
+  :commands lsp
+  :hook (
+         (rjsx-mode . lsp)
+         (typescript-mode . lsp)
+         ))
+
+;; (use-package! lsp-mode
+;;   :commands lsp
+;;   :hook ((typescript-mode . lsp)))
+
+(setq lsp-lens-enable nil)
+
+
+;; Lsp solidity
+(use-package! company-solidity
+  :after (company))
+
+(use-package! solidity-mode
+  :config
+  (setq format-all-mode nil))
+(setq-hook! 'solidity-mode-hook +format-all-mode nil)
+
+(add-hook 'solidity-mode-hook
+          (lambda ()
+            (set (make-local-variable 'company-backends)
+                 (append '((company-solidity company-capf company-dabbrev-code))
+                         company-backends))))
+;; Company:1 ends here
+
+;; [[file:config.org::*flycheck][flycheck:1]]
+(use-package! solidity-flycheck
+  :config
+  (setq solidity-solc-path "~/usr/local/bin/solcjs")
+  (setq solidity-solium-path "~/usr/local/bin/solium")
+  (setq solidity-flycheck-solc-checker-active t)
+  (setq solidity-flycheck-solium-checker-active t)
+  (setq flycheck-solidity-solc-addstd-contracts t)
+  (setq flycheck-solidity-solium-soliumrcfile "~/.soliumrc.json")
+)
+
+;; See https://github.com/ethereum/emacs-solidity#local-variables
+(add-hook 'solidity-mode-hook
+    (lambda ()
+    (set (make-local-variable 'company-backends)
+        (append '((company-solidity company-capf company-dabbrev-code))
+            company-backends))))
+
+
+;; My UX :)
 (good-scroll-mode 1)
 
-(setq lsp-ui-doc-enable t)
+;; Yassnippet
 
-;; Solidity
-(setq solidity-solc-path "~/")
 
 ;; (define-key evil-normal-state-map (kbd "C-c [") 'js2-err)
 ;; (define-key evil-normal-state-map (kbd "C-j") 'js2-next-error)
@@ -90,9 +144,6 @@
 (setq blamer-datetime-formatter "[%s]")
 (setq blamer-commit-formatter " ● %s")
 
-(after! lsp-mode
-  :hook lsp-ui-mode t)
-
 (map!
         ;; Command/Window
         "s-k"          #'move-text-up
@@ -139,20 +190,6 @@
        :n     "wd"           #'treemacs-remove-workspace
        :n     "wf"           #'treemacs-rename-workspace
        )
-
-
-      ;; Moving window and split like vim
-      ;; (:prefix ("s" . "Split and move windows")
-      ;; :n "w" #'save-buffer
-      ;; :n "q" #'evil-quit
-      ;; :n "s" #'split-window-below
-      ;; :n "v" #'split-window-right
-      ;; :n "l" #'windmove-right
-      ;; :n "h" #'windmove-left
-      ;; :n "k" #'windmove-up
-      ;; :n "j" #'windmove-down
-      ;; :n "f" #'projectile-find-file
-      ;; )
 
 )
 
@@ -230,7 +267,8 @@
     :keybinding "d")
 
   (defengine github
-    "https://github.com/search?ref=simplesearch&q=%s"
+    ;; "https://github.com/search?ref=simplesearch&q=%s"
+    "https://github.com/%s"
     :keybinding "1")
 
   (defengine gitlab
@@ -278,7 +316,7 @@
 ;; accept. For example:
 ;;
 (setq doom-font (font-spec :family "Hack Nerd Font" :size 16 :weight 'semi-light)
-     doom-variable-pitch-font (font-spec :family "Hack Nerd Font" :size 13))
+     doom-variable-pitch-font (font-spec :family "Hack Nerd Font" :size 14))
 ;;
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
@@ -295,8 +333,7 @@
 
 ;; Manual install
 ;; git clone https://git.sr.ht/~theorytoe/everforest-theme ~/.emacs.d/everforest-theme
-;; (add-to-list 'custom-theme-load-path "~/.emacs.d/everforest/everforest-hard-dark-theme.el")
- (setq doom-theme 'everforest-hard-dark)
+(setq doom-theme 'everforest-hard-dark)
 
 
 

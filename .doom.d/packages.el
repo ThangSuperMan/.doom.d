@@ -10,13 +10,6 @@
 
 (package! good-scroll)
 
-(package! everforest
-  :recipe (:repo "https://git.sr.ht/~theorytoe/everforest-theme"))
-
-(use-package! 'everforest')
-
-(load-theme 'everforest-hard-dark t)
-
 ;; (load-theme 'everforest-hard-light t)
 
 ;; (package! parrot)
@@ -28,6 +21,8 @@
   :recipe (:host github
            :repo "emacsfodder/move-text")
   )
+
+(package! lsp-mssql)
 
 ;; -*- no-byte-compile: t; -*-
 ;;; $DOOMDIR/packages.el
