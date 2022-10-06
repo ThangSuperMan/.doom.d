@@ -6,6 +6,19 @@
 ;; Git desc feature: watching the git commit message
 (package! blamer)
 
+(package! lsp-ui)
+
+(package! good-scroll)
+
+(package! everforest
+  :recipe (:repo "https://git.sr.ht/~theorytoe/everforest-theme"))
+
+(use-package! 'everforest')
+
+(load-theme 'everforest-hard-dark t)
+
+;; (load-theme 'everforest-hard-light t)
+
 ;; (package! parrot)
 
 ;; Searching staff on the internet (Youtube, google, ...)

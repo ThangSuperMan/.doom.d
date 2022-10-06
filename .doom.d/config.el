@@ -2,14 +2,31 @@
       user-mail-address "thanglemon204@gmail.com")
 
 ;; You have to install the ef-thems first by using the command M-x: packages-install
-(require 'ef-themes)
-(load-theme 'ef-summer t)
+;; (require 'ef-themes)
+;; (load-theme 'ef-summer t)
 
 ;; Turn off the highlight current line
 (setq global-hl-line-modes nil)
 
+(setq lsp-ui-doc-enable t)
+;; Show refereneces
+(setq lsp-lens-enable nil)
+(setq lsp-headerline-breadcrumb-enable t)
+(setq lsp-ui-sideline-enable t)
+(setq lsp-modeline-diagnostics-enable t)
+
+(good-scroll-mode 1)
+
+(setq lsp-ui-doc-enable t)
+
+;; Solidity
+(setq solidity-solc-path "~/")
+
 ;; (define-key evil-normal-state-map (kbd "C-c [") 'js2-err)
-(define-key evil-normal-state-map (kbd "C-j") 'js2-next-error)
+;; (define-key evil-normal-state-map (kbd "C-j") 'js2-next-error)
+
+(define-key evil-normal-state-map (kbd "C-j") 'next-error)
+(define-key evil-normal-state-map (kbd "C-k") 'previous-error)
 
 ;; [[file:config.org::*Clock][Clock:1]]
 (after! doom-modeline
@@ -41,6 +58,15 @@
         doom-modeline-buffer-file-name-style 'truncate-upto-project))
 ;; Mode line customization:1 ends here
 
+;; improve LSP
+;; (after! lsp-mode
+;;   (setq lsp-auto-guess-root t)
+;;   (setq lsp-solargraph-symbols nil)
+;;   (setq lsp-solargraph-folding nil))
+
+;; (after! lsp-mode
+;;   (setq lsp-disabled-clients '(emmet-ls))
+;;   (setq lsp-ui-sideline-show-code-actions t))
 
 ;; Git blammer
 (map!
@@ -63,6 +89,9 @@
 (setq blamer-author-formatter " ✎ %s ")
 (setq blamer-datetime-formatter "[%s]")
 (setq blamer-commit-formatter " ● %s")
+
+(after! lsp-mode
+  :hook lsp-ui-mode t)
 
 (map!
         ;; Command/Window
@@ -234,6 +263,8 @@
 
   (engine-mode 1))
 
+(setq fancy-splash-image "~/Downloads/baby-yoda.gif")
+
 ;; Doom exposes five (optional) variables for controlling fonts in Doom:
 ;;
 ;; - `doom-font' -- the primary font to use
@@ -246,8 +277,8 @@
 ;; See 'C-h v doom-font' for documentation and more examples of what they
 ;; accept. For example:
 ;;
-;;(setq doom-font (font-spec :family "Fira Code" :size 12 :weight 'semi-light)
-;;      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 13))
+(setq doom-font (font-spec :family "Hack Nerd Font" :size 16 :weight 'semi-light)
+     doom-variable-pitch-font (font-spec :family "Hack Nerd Font" :size 13))
 ;;
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
@@ -258,9 +289,16 @@
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 ;; (setq doom-theme 'doom-solarized-dark)
-;; (setq doom-theme 'doom-solarized-dark-high-contrast)
+;; (setq doom-theme 'doom-solarized-light-high-contrast)
 ;; (setq doom-theme 'doom-dracula)
-;; (setq
+
+
+;; Manual install
+;; git clone https://git.sr.ht/~theorytoe/everforest-theme ~/.emacs.d/everforest-theme
+;; (add-to-list 'custom-theme-load-path "~/.emacs.d/everforest/everforest-hard-dark-theme.el")
+ (setq doom-theme 'everforest-hard-dark)
+
+
 
 ;; (use-package ef-themes)
 ;; (load-theme 'ef-summer t)

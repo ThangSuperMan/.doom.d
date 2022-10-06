@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Licence
+# key: spdx
+# --
+
+// SPDX-License-Identifier: MIT
